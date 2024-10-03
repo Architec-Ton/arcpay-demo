@@ -7,7 +7,7 @@ import {
   useTonConnectUI,
 } from '@tonconnect/ui-react';
 
-const ARCPAY_URL = 'http://arcpay.online/api/v1/arcpay';
+const ARCPAY_URL = 'https://arcpay.online/api/v1/arcpay';
 const fetchArcpay = async (
   url: string,
   method?: string,
