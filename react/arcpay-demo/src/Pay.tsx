@@ -7,7 +7,7 @@ import { DisplayOrder } from './components/DisplayOrder';
 const testForOrder = {
   title: 'Sample selling box',
   orderId: `INV-${Date.now()}`,
-  currency: 'ARC',
+  currency: 'TON',
   items: [
     {
       title: 'Travel',
@@ -47,6 +47,9 @@ function Pay() {
         setOrder(order_respopnse);
         if (order_respopnse?.status == OrderStatus.received) {
           setFlowStatus(OrderStatus.received);
+        }
+        if (order_respopnse?.status == OrderStatus.failed) {
+          setFlowStatus(OrderStatus.failed);
         }
       }
     };
@@ -105,6 +108,16 @@ function Pay() {
       {flowStatus == 'received' && order && (
         <div>
           <h2>Order received from {order.customer?.wallet}</h2>
+          <a
+            href={`https://testnet.tonviewer.com/transaction/${order.txn?.hash}`}>
+            View transaction
+          </a>
+        </div>
+      )}
+
+      {flowStatus == 'failed' && order && (
+        <div>
+          <h2>Order FAILED from {order.customer?.wallet}</h2>
           <a
             href={`https://testnet.tonviewer.com/transaction/${order.txn?.hash}`}>
             View transaction
